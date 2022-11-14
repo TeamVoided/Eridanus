@@ -21,7 +21,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.team.voided.Eridanus::onInitialize"
+        "value": "com.team.voided.EridanusKt::onInitialize"
       }
     ]
   },
