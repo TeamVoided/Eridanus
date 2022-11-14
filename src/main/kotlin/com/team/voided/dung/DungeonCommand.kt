@@ -4,25 +4,21 @@ import com.mojang.brigadier.context.CommandContext
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
+import kotlin.random.Random
 
 object DungeonCommand {
+    val size = 4
 
-    private var dungeon = Array(4) { _ -> Array(4) { _ -> UnknownTile.FULL } }
+    private var dungeon = Array(size) { _ -> Array(size) { _ -> UnknownTile.FULL } }
 
     fun run(context: CommandContext<ServerCommandSource>): Int {
-//        LOGGER.info("hi$context")
         if (context.source.entity!!.isPlayer) {
             val player = context.source.entity as PlayerEntity
-            player.sendMessage(Text.literal("Starting gen.."))
             val pos = player.blockPos.mutableCopy()
-            pos.y--
-            for (i in dungeon.indices) {
-                for (j in 0 until dungeon[i].size) {
-                    val modifiedPos = pos.mutableCopy()
-                    modifiedPos.x += i
-                    modifiedPos.z += j
-                }
-            }
+            val sTile = dungeon[Random.nextInt(size)][Random.nextInt(size)]
+            sTile.pStates = arrayOf(Tile.NOTHING)
+            sTile.collapse()
+
             player.sendMessage(Text.literal("Done gen!"))
             return 1
         }

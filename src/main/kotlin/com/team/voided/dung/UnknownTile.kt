@@ -1,6 +1,6 @@
 package com.team.voided.dung
 
-class UnknownTile(var possible: Array<Tile> ) {
+class UnknownTile(var pStates: Array<Tile> ) {
 
     companion object {
         val EMPTY = UnknownTile(emptyArray())
@@ -15,6 +15,9 @@ class UnknownTile(var possible: Array<Tile> ) {
 
     fun collapse() {
         this.collapsed = true;
+    }
+    fun shoudlCollapse(): Boolean{
+        return pStates.size == 1
     }
 
 
