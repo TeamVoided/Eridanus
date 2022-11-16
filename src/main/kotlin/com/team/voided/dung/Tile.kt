@@ -19,6 +19,7 @@ enum class Tile(
     fun place(world: World, pos: BlockPos) {
         world.setBlockState(pos, this.block.defaultState)
     }
+
     fun getSides(): Vector4f {
         return this.sides
     }

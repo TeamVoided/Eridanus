@@ -29,9 +29,10 @@ object DungeonCommand {
             sTile.pStates = arrayOf(Tile.NOTHING)
             sTile.collapse()
 
-//            val list: Array<UnknownTile> = dungeon.clone().reduce { acc, tiles -> acc + tiles }
-//
-//            list.sortBy { tile -> tile.entropyLevel() }
+            /*
+            val list: Array<UnknownTile> = dungeon.clone().reduce { acc, tiles -> acc + tiles }
+            list.sortBy { tile -> tile.entropyLevel() }
+            */
             for (ray in dungeon) {
                 for (item in ray) {
                     LOGGER.info(GSON!!.toJson(item).toString() + "\n" + item.entropyLevel())
@@ -43,7 +44,8 @@ object DungeonCommand {
         return 0
     }
 
-    /* private fun propagatePStates(inTile: Vec2i) {
+    /*
+     private fun propagatePStates(inTile: Vec2i) {
          for (dir in directions) {
              val newTile = inTile.copy().add(dir)
              if (
@@ -58,9 +60,7 @@ object DungeonCommand {
                      propagatePStates(newTile)
                  }
              }
-
-
          }
-
-     }*/
+     }
+     */
 }
