@@ -1,7 +1,6 @@
 package com.team.voided.lib
 
 data class Vec2i(var x: Int, var y: Int) {
-
     operator fun unaryPlus() = Vec2i(+x, +y)
     operator fun unaryMinus() = Vec2i(-x, -y)
 
