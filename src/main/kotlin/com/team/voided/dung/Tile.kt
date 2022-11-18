@@ -10,7 +10,7 @@ enum class Tile(
     private val block: Block,
     private val sides: Vector4f
 ) {
-    NOTHING(Blocks.WHITE_CONCRETE, Vector4f(0F, 0F, 0F, 0F)),
+    NOTHING(Blocks.WHITE_CONCRETE, Vector4f(0F, 0F, 0F, 0F), ),
     IRON(Blocks.IRON_BLOCK, Vector4f(1F, 1F, 0F, 1F)),
     NETHER(Blocks.NETHERITE_BLOCK, Vector4f(0F, 2F, 1F, 2F)),
     DEEP(Blocks.POLISHED_DEEPSLATE, Vector4f(0F, 1F, 0F, 2F)),
