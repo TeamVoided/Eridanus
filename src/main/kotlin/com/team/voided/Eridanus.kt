@@ -6,6 +6,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import com.team.voided.config.ClientConfig
 import com.team.voided.config.ServerConfig
 import com.team.voided.dung.DungeonCommand
+import com.team.voided.item.VoidShardItems
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
@@ -34,4 +35,6 @@ fun onInitialize() {
             .build()
         dispatcher.root.addChild(dungeonNode)
     }
+
+    VoidShardItems.register()
 }

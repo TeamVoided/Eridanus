@@ -4,6 +4,7 @@
   "package": "com.team.voided.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MixinEntity"
   ],
   "client": [
     "client.MixinTitleScreen"

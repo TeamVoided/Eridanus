@@ -23,6 +23,12 @@
         "adapter": "kotlin",
         "value": "com.team.voided.EridanusKt::onInitialize"
       }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "com.team.voided.client.EridanusClientKt::onInitializeClient"
+      }
     ]
   },
   "mixins": [
