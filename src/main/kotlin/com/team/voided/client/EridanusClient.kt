@@ -1,6 +1,5 @@
 package com.team.voided.client
 
-import com.team.voided.dung.DungeonCommand
 import com.team.voided.item.VoidShardItem
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
@@ -36,8 +35,6 @@ fun onInitializeClient() {
             val player = client.player!!.inventory.player
             player.sendMessage(Text.of("You have ${VoidShardItem.getVoidShardsFromPlayer(player)} void shards"))
         }
-        while (enderDebug!!.wasPressed()) {
-            DungeonCommand.kill = !DungeonCommand.kill
-        }
+
     }
 }

@@ -2,14 +2,9 @@ package com.team.voided
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.mojang.brigadier.tree.LiteralCommandNode
 import com.team.voided.config.ClientConfig
 import com.team.voided.config.ServerConfig
-import com.team.voided.dung.DungeonCommand
 import com.team.voided.item.VoidShardItems
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
-import net.minecraft.server.command.CommandManager
-import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
@@ -27,14 +22,6 @@ val id: (String) -> Identifier = { Identifier(MODID, it) }
 @Suppress("unused")
 fun onInitialize() {
     LOGGER.info("Hello empty void!")
-
-    CommandRegistrationCallback.EVENT.register { dispatcher, _, _ ->
-        val dungeonNode: LiteralCommandNode<ServerCommandSource> = CommandManager
-            .literal("dungeon")
-            .executes(DungeonCommand::run)
-            .build()
-        dispatcher.root.addChild(dungeonNode)
-    }
 
     VoidShardItems.register()
 }
