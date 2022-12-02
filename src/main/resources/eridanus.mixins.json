@@ -6,9 +6,7 @@
   "mixins": [
     "MixinEntity"
   ],
-  "client": [
-    "client.MixinTitleScreen"
-  ],
+  "client": [ ],
   "injectors": {
     "defaultRequire": 1
   }

@@ -29,7 +29,8 @@
         "adapter": "kotlin",
         "value": "com.team.voided.client.EridanusClientKt::onInitializeClient"
       }
-    ]
+    ],
+    "modmenu": [ "com.team.voided.EridanusModMenuApiImpl" ]
   },
   "mixins": [
     "eridanus.mixins.json"
