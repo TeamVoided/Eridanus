@@ -114,7 +114,7 @@ class VoidShardPouch(settings: Settings?) : Item(settings) {
                     removeShards(64, stack)
                     playRemoveOneSound(player)
                 }
-            } else {
+            } else if (slot.stack.item == EridanusItems.VOID_SHARD) {
                 val size = slot.stack.count
                 slot.stack.decrement(size)
                 addShards(size.toLong(), stack)
