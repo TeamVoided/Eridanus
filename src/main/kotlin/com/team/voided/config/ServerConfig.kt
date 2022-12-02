@@ -12,7 +12,7 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Suppress("duplicates")
-class ServerConfig(_id: Identifier) : Config<ServerConfig>(_id) {
+class ServerConfig(id: Identifier) : Config<ServerConfig>(id) {
     companion object {
         fun fromJson(id: Identifier): ServerConfig? {
             val config = ServerConfig(id)

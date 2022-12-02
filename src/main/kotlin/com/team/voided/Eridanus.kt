@@ -4,15 +4,13 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.team.voided.config.ClientConfig
 import com.team.voided.config.ServerConfig
-import com.team.voided.item.VoidShardItems
+import com.team.voided.item.EridanusItems
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 const val MODID = "eridanus"
-
-val id: (String) -> Identifier = { Identifier(MODID, it) }
 
 @JvmField val LOGGER: Logger = LoggerFactory.getLogger(MODID)
 @JvmField val GSON: Gson? = GsonBuilder().setPrettyPrinting().create()
@@ -23,5 +21,9 @@ val id: (String) -> Identifier = { Identifier(MODID, it) }
 fun onInitialize() {
     LOGGER.info("Hello empty void!")
 
-    VoidShardItems.register()
+    EridanusItems.register()
 }
+
+fun id(path: String): Identifier
+    = Identifier(MODID, path)
+

@@ -20,7 +20,7 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Suppress("duplicates")
-class ClientConfig(_id: Identifier) : Config<ClientConfig>(_id) {
+class ClientConfig(id: Identifier) : Config<ClientConfig>(id) {
     private var categoryBuilder: ConfigCategory.Builder? = null
     private var name: Text? = null
 
