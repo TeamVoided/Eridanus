@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.team.voided.config.ClientConfig
 import com.team.voided.config.ServerConfig
+import com.team.voided.entity.EridanusEntities
 import com.team.voided.item.EridanusItems
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
@@ -22,6 +23,7 @@ fun onInitialize() {
     LOGGER.info("Hello empty void!")
 
     EridanusItems.register()
+    EridanusEntities.registerAttributes()
 }
 
 fun id(path: String): Identifier

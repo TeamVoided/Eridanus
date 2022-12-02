@@ -1,5 +1,6 @@
 package com.team.voided.client
 
+import com.team.voided.entity.EridanusEntities
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
@@ -17,4 +18,6 @@ fun onInitializeClient() {
             "category.eridanus.key_binds"
         )
     )
+
+    EridanusEntities.registerRenderers()
 }
