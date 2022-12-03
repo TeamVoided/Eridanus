@@ -5,9 +5,6 @@ import com.team.voided.item.gemstone.GemstoneHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,8 +28,6 @@ public abstract class ItemStackMixin {
 
     @Shadow public abstract ItemStack copy();
 
-    @Shadow private int count;
-
     @Shadow public abstract void setCount(int count);
 
     @Shadow public abstract void setDamage(int damage);
@@ -46,10 +41,6 @@ public abstract class ItemStackMixin {
     @Shadow public abstract void setRepairCost(int repairCost);
 
     @Shadow public abstract void setBobbingAnimationTime(int bobbingAnimationTime);
-
-    @Shadow public abstract void addAttributeModifier(EntityAttribute attribute, EntityAttributeModifier modifier, @Nullable EquipmentSlot slot);
-
-    @Shadow private @Nullable Entity holder;
 
     @Inject(method = "getMiningSpeedMultiplier", at = @At("RETURN"), cancellable = true)
     private void changeMiningSpeedMultiplier(BlockState state, CallbackInfoReturnable<Float> cir) {

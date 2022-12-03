@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtList
-import java.util.UUID
+import java.util.*
 
 class ItemNBTHelper private constructor() {
     companion object {

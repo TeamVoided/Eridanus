@@ -2,8 +2,8 @@ package com.team.voided.item
 
 import com.team.voided.VoidRarity
 import com.team.voided.id
-import com.team.voided.item.gemstone.GemstoneItem
 import com.team.voided.item.gemstone.Gemstone
+import com.team.voided.item.gemstone.GemstoneItem
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes

@@ -12,9 +12,7 @@ import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilde
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.entity.EntityType
-import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.util.registry.Registry
 

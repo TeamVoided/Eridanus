@@ -12,8 +12,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier.Operation.*
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NbtCompound
-import net.minecraft.nbt.NbtElement
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import java.util.*
@@ -96,7 +94,7 @@ class Gemstone(val id: Identifier) {
         }
 
         fun buildAndRegister(): Gemstone {
-            val gemstone = build();
+            val gemstone = build()
 
             return Registry.register(EridanusRegistries.GEMSTONE, gemstone.id, gemstone)
         }
