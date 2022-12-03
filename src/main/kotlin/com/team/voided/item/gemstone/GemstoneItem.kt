@@ -11,26 +11,28 @@ open class GemstoneItem(settings: Settings, val gemstone: Gemstone) : Item(setti
 
     override fun onStackClicked(stack: ItemStack, slot: Slot, clickType: ClickType, player: PlayerEntity): Boolean {
         if (!slot.stack.isEmpty) {
-            val oGemstone = GemstoneHelper.getGemstone(slot.stack)
-            if (oGemstone == null) {
-                GemstoneHelper.setGemstone(slot.stack, gemstone)
-                gemstone.applyAttributeMods(slot.stack)
-                stack.decrement(1)
-            } else {
-                val original = slot.stack.copy()
-                slot.stack = ItemStack(slot.stack.item, slot.stack.count)
-                EnchantmentHelper.get(original).forEach { (enchantment, level) ->
-                    slot.stack.addEnchantment(enchantment, level)
+            if (gemstone.acceptApplyOn(slot.stack)) {
+                val oGemstone = GemstoneHelper.getGemstone(gemstone.type, slot.stack)
+                if (oGemstone == null) {
+                    GemstoneHelper.setGemstone(gemstone.type, slot.stack, gemstone)
+                    gemstone.applyAttributeMods(slot.stack)
+                    stack.decrement(1)
+                } else {
+                    val original = slot.stack.copy()
+                    slot.stack = ItemStack(slot.stack.item, slot.stack.count)
+                    EnchantmentHelper.get(original).forEach { (enchantment, level) ->
+                        slot.stack.addEnchantment(enchantment, level)
+                    }
+                    slot.stack.setCustomName(original.name)
+                    slot.stack.damage = original.damage
+                    slot.stack.repairCost = original.repairCost
+                    slot.stack.bobbingAnimationTime = original.bobbingAnimationTime
+                    GemstoneHelper.setGemstone(gemstone.type, slot.stack, gemstone)
+                    gemstone.applyAttributeMods(slot.stack)
+                    stack.decrement(1)
                 }
-                slot.stack.setCustomName(original.name)
-                slot.stack.damage = original.damage
-                slot.stack.repairCost = original.repairCost
-                slot.stack.bobbingAnimationTime = original.bobbingAnimationTime
-                GemstoneHelper.setGemstone(slot.stack, gemstone)
-                gemstone.applyAttributeMods(slot.stack)
-                stack.decrement(1)
+                return true
             }
-            return true
         }
 
         return false

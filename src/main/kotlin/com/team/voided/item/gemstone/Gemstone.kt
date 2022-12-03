@@ -1,7 +1,6 @@
 package com.team.voided.item.gemstone
 
 import com.team.voided.EridanusRegistries
-import com.team.voided.LOGGER
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
@@ -16,23 +15,34 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import java.util.*
 
-class Gemstone(val id: Identifier) {
-    private var attributeMods: MutableMap<EntityAttribute, Pair<EquipmentSlot, Pair<Operation, Double>>> = HashMap()
+open class Gemstone(val id: Identifier, val type: GemstoneType) {
+    private var attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
     private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
-    private var statusEffects: List<Pair<StatusEffect, Int>> = LinkedList()
+    private var statusEffects: List<Pair<Pair<StatusEffect, Int>, DualGemstonePredicate<Entity, Int>>> = LinkedList()
+    private var applyPredicate: GemstonePredicate<ItemStack> = GemstonePredicate.TRUE
+
+    fun acceptApplyOn(toApply: ItemStack): Boolean {
+        return applyPredicate.calculate(toApply)
+    }
 
     fun applyAttributeMods(stack: ItemStack) {
         attributeMods.forEach { (attribute, pair) ->
-            stack.addAttributeModifier(attribute, EntityAttributeModifier("eridanus.gemstone.modifier.${attribute.translationKey}", pair.second.second, pair.second.first), pair.first)
+            if (pair.second.calculate(stack)) {
+                stack.addAttributeModifier(
+                    attribute,
+                    EntityAttributeModifier("eridanus.gemstone.modifier.${attribute.translationKey}.${System.nanoTime()}", pair.first.second.second, pair.first.second.first),
+                    pair.first.first
+                )
+            }
         }
     }
 
-    fun applyStatusEffects(entity: Entity?) {
-        LOGGER.info("Applying stage 1")
-
+    fun applyStatusEffects(entity: Entity, slot: Int) {
         if (entity is LivingEntity) {
             statusEffects.forEach {
-                entity.addStatusEffect(StatusEffectInstance(it.first, 20, it.second, false, true))
+                if (it.second.calculate(entity, slot)) {
+                    entity.addStatusEffect(StatusEffectInstance(it.first.first, 20, it.first.second, false, true))
+                }
             }
         }
     }
@@ -49,18 +59,19 @@ class Gemstone(val id: Identifier) {
         }
     }
 
-    class Builder(val id: Identifier) {
-        private val attributeMods: MutableMap<EntityAttribute, Pair<EquipmentSlot, Pair<Operation, Double>>> = HashMap()
+    class Builder(val id: Identifier, val type: GemstoneType) {
+        private val attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
         private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
-        private val statusEffects: MutableList<Pair<StatusEffect, Int>> = LinkedList()
+        private val statusEffects: MutableList<Pair<Pair<StatusEffect, Int>, DualGemstonePredicate<Entity, Int>>> = LinkedList()
+        private var applyPredicate: GemstonePredicate<ItemStack> = GemstonePredicate.TRUE
 
-        fun modifyAttribute(attribute: EntityAttribute, operation: Operation, modifier: Double, equipmentSlot: EquipmentSlot): Builder {
-            attributeMods[attribute] = Pair(equipmentSlot, Pair(operation, modifier))
+        fun modifyAttribute(attribute: EntityAttribute, operation: Operation, modifier: Double, equipmentSlot: EquipmentSlot, predicate: GemstonePredicate<ItemStack>): Builder {
+            attributeMods[attribute] = Pair(Pair(equipmentSlot, Pair(operation, modifier)), predicate)
             return this
         }
 
-        fun modifyAttribute(attribute: EntityAttribute, attributeModifier: EntityAttributeModifier, equipmentSlot: EquipmentSlot): Builder {
-            attributeMods[attribute] = Pair(equipmentSlot, Pair(attributeModifier.operation, attributeModifier.value))
+        fun modifyAttribute(attribute: EntityAttribute, attributeModifier: EntityAttributeModifier, equipmentSlot: EquipmentSlot, predicate: GemstonePredicate<ItemStack>): Builder {
+            attributeMods[attribute] = Pair(Pair(equipmentSlot, Pair(attributeModifier.operation, attributeModifier.value)), predicate)
             return this
         }
 
@@ -79,16 +90,22 @@ class Gemstone(val id: Identifier) {
             return this
         }
 
-        fun addStatusEffect(statusEffect: StatusEffect, level: Int): Builder {
-            statusEffects.add(Pair(statusEffect, level))
+        fun addStatusEffect(statusEffect: StatusEffect, level: Int, predicate: DualGemstonePredicate<Entity, Int>): Builder {
+            statusEffects.add(Pair(Pair(statusEffect, level), predicate))
+            return this
+        }
+
+        fun withApplyPredicate(predicate: GemstonePredicate<ItemStack>): Builder {
+            applyPredicate = predicate
             return this
         }
 
         fun build(): Gemstone {
-            val gemstone = Gemstone(id)
+            val gemstone = Gemstone(id, type)
             gemstone.attributeMods = attributeMods
             gemstone.miningSpeedModifier = miningSpeedModifier
             gemstone.statusEffects = statusEffects
+            gemstone.applyPredicate = applyPredicate
 
             return gemstone
         }
