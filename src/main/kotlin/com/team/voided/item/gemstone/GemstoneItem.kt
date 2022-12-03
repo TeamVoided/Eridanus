@@ -1,7 +1,6 @@
 package com.team.voided.item.gemstone
 
 import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -18,20 +17,18 @@ open class GemstoneItem(settings: Settings, val gemstone: Gemstone) : Item(setti
                 gemstone.applyAttributeMods(slot.stack)
                 stack.decrement(1)
             } else {
-                for (eSlot in EquipmentSlot.values()) {
-                    val original = slot.stack.copy()
-                    slot.stack = ItemStack(slot.stack.item, slot.stack.count)
-                    EnchantmentHelper.get(original).forEach { (enchantment, level) ->
-                        slot.stack.addEnchantment(enchantment, level)
-                    }
-                    slot.stack.setCustomName(original.name)
-                    slot.stack.damage = original.damage;
-                    slot.stack.repairCost = original.repairCost
-                    slot.stack.bobbingAnimationTime = original.bobbingAnimationTime
-                    GemstoneHelper.setGemstone(slot.stack, gemstone)
-                    gemstone.applyAttributeMods(slot.stack)
-                    stack.decrement(1)
+                val original = slot.stack.copy()
+                slot.stack = ItemStack(slot.stack.item, slot.stack.count)
+                EnchantmentHelper.get(original).forEach { (enchantment, level) ->
+                    slot.stack.addEnchantment(enchantment, level)
                 }
+                slot.stack.setCustomName(original.name)
+                slot.stack.damage = original.damage
+                slot.stack.repairCost = original.repairCost
+                slot.stack.bobbingAnimationTime = original.bobbingAnimationTime
+                GemstoneHelper.setGemstone(slot.stack, gemstone)
+                gemstone.applyAttributeMods(slot.stack)
+                stack.decrement(1)
             }
             return true
         }
