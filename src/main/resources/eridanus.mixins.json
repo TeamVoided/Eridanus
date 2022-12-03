@@ -4,9 +4,10 @@
   "package": "com.team.voided.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ItemStackMixin",
     "MixinEntity"
   ],
-  "client": [ ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

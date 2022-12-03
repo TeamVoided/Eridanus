@@ -29,3 +29,11 @@ fun onInitialize() {
 fun id(path: String): Identifier
     = Identifier(MODID, path)
 
+fun identifierFromString(string: String): Identifier {
+    if (string.contains(":")) {
+        val split = string.split(":")
+        return Identifier(split[0], split[1])
+    }
+
+    return Identifier(string)
+}
