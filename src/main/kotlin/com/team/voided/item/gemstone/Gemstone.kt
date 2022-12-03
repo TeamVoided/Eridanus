@@ -25,8 +25,8 @@ class Gemstone(val id: Identifier) {
         attributeMods.forEach { (attribute, pair) ->
             stack.addAttributeModifier(attribute, EntityAttributeModifier("eridanus.gemstone.modifier.${attribute.translationKey}", pair.second.second, pair.second.first), pair.first)
         }
-
     }
+
     fun applyStatusEffects(entity: Entity?) {
         LOGGER.info("Applying stage 1")
 
