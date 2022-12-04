@@ -6,6 +6,7 @@
   "name": "Eridanus",
   "description": "void!",
   "authors": [
+    "BrokenFuse",
     "Ender"
   ],
   "contact": {
@@ -21,16 +22,16 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.team.voided.EridanusKt::onInitialize"
+        "value": "org.team.voided.eridanus.EridanusKt::onInitialize"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.team.voided.client.EridanusClientKt::onInitializeClient"
+        "value": "org.team.voided.eridanus.client.EridanusClientKt::onInitializeClient"
       }
     ],
-    "modmenu": [ "com.team.voided.EridanusModMenuApiImpl" ]
+    "modmenu": [ "org.team.voided.eridanus.EridanusModMenuApiImpl" ]
   },
   "mixins": [
     "eridanus.mixins.json"
