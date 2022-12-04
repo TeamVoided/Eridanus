@@ -9,13 +9,13 @@ import java.nio.charset.StandardCharsets
 class GemstoneHelper {
     companion object {
         fun getGemstone(slot: GemstoneSlot, stack: ItemStack): Gemstone? {
-            val gemstoneId = identifierFromString(String(ItemNBTHelper.getByteArray("eridanus.gemstone.${slot.name.lowercase()}", stack), StandardCharsets.UTF_8))
+            val gemstoneId = identifierFromString(String(ItemNBTHelper.getByteArray("eridanus.gemstone.${slot.id.namespace}.${slot.id.path}", stack), StandardCharsets.UTF_8))
 
             return EridanusRegistries.GEMSTONE[gemstoneId]
         }
 
-        fun setGemstone(type: GemstoneSlot, stack: ItemStack, gemstone: Gemstone) {
-            ItemNBTHelper.putByteArray("eridanus.gemstone.${type.name.lowercase()}", gemstone.id.toString().toByteArray(StandardCharsets.UTF_8), stack)
+        fun setGemstone(slot: GemstoneSlot, stack: ItemStack, gemstone: Gemstone) {
+            ItemNBTHelper.putByteArray("eridanus.gemstone.${slot.id.namespace}.${slot.id.path}", gemstone.id.toString().toByteArray(StandardCharsets.UTF_8), stack)
         }
     }
 }

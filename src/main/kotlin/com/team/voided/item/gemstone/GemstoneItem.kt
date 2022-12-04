@@ -11,7 +11,7 @@ open class GemstoneItem(settings: Settings, val gemstone: Gemstone) : Item(setti
 
     override fun onStackClicked(stack: ItemStack, slot: Slot, clickType: ClickType, player: PlayerEntity): Boolean {
         if (!slot.stack.isEmpty) {
-            if (gemstone.acceptApplyOn(slot.stack)) {
+            if (gemstone.slot.acceptApplyOn(slot.stack) && gemstone.acceptApplyOn(slot.stack)) {
                 val oGemstone = GemstoneHelper.getGemstone(gemstone.slot, slot.stack)
                 if (oGemstone == null) {
                     GemstoneHelper.setGemstone(gemstone.slot, slot.stack, gemstone)
