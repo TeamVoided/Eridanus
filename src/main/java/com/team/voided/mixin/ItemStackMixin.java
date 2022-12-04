@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -79,7 +80,7 @@ public abstract class ItemStackMixin {
         for (GemstoneType type : GemstoneType.values()) {
             Gemstone gemstone = GemstoneHelper.Companion.getGemstone(type, copy());
             if (gemstone != null) {
-                current.add(Text.translatable("gemstone.%1s.%2s".formatted(gemstone.getId().getNamespace(), gemstone.getId().getPath())));
+                current.add(Text.translatable("gemstone.%1s.%2s".formatted(gemstone.getId().getNamespace(), gemstone.getId().getPath())).formatted(Formatting.DARK_GRAY));
             }
         }
     }
