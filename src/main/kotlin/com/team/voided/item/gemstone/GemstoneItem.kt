@@ -12,9 +12,9 @@ open class GemstoneItem(settings: Settings, val gemstone: Gemstone) : Item(setti
     override fun onStackClicked(stack: ItemStack, slot: Slot, clickType: ClickType, player: PlayerEntity): Boolean {
         if (!slot.stack.isEmpty) {
             if (gemstone.acceptApplyOn(slot.stack)) {
-                val oGemstone = GemstoneHelper.getGemstone(gemstone.type, slot.stack)
+                val oGemstone = GemstoneHelper.getGemstone(gemstone.slot, slot.stack)
                 if (oGemstone == null) {
-                    GemstoneHelper.setGemstone(gemstone.type, slot.stack, gemstone)
+                    GemstoneHelper.setGemstone(gemstone.slot, slot.stack, gemstone)
                     gemstone.applyAttributeMods(slot.stack)
                     stack.decrement(1)
                 } else {
@@ -27,7 +27,7 @@ open class GemstoneItem(settings: Settings, val gemstone: Gemstone) : Item(setti
                     slot.stack.damage = original.damage
                     slot.stack.repairCost = original.repairCost
                     slot.stack.bobbingAnimationTime = original.bobbingAnimationTime
-                    GemstoneHelper.setGemstone(gemstone.type, slot.stack, gemstone)
+                    GemstoneHelper.setGemstone(gemstone.slot, slot.stack, gemstone)
                     gemstone.applyAttributeMods(slot.stack)
                     stack.decrement(1)
                 }

@@ -2,7 +2,7 @@ package com.team.voided.mixin;
 
 import com.team.voided.item.gemstone.Gemstone;
 import com.team.voided.item.gemstone.GemstoneHelper;
-import com.team.voided.item.gemstone.GemstoneType;
+import com.team.voided.item.gemstone.GemstoneSlot;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -51,8 +51,8 @@ public abstract class ItemStackMixin {
 
         copyParams(copy);
 
-        for (GemstoneType type : GemstoneType.values()) {
-            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(type, copy);
+        for (GemstoneSlot gSlot : GemstoneSlot.values()) {
+            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(gSlot, copy);
             if (gemstone != null) {
                 def = gemstone.calculateMiningSpeedModifier(def);
             }
@@ -65,8 +65,8 @@ public abstract class ItemStackMixin {
     private void applyGemstoneEffects(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
         ItemStack copy = copy();
 
-        for (GemstoneType type : GemstoneType.values()) {
-            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(type, copy);
+        for (GemstoneSlot gSLot : GemstoneSlot.values()) {
+            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(gSLot, copy);
             if (gemstone != null) {
                 gemstone.applyStatusEffects(world, entity, slot, selected);
             }
@@ -77,8 +77,8 @@ public abstract class ItemStackMixin {
     private void addGemstoneTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir) {
         List<Text> current = cir.getReturnValue();
 
-        for (GemstoneType type : GemstoneType.values()) {
-            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(type, copy());
+        for (GemstoneSlot gSlot : GemstoneSlot.values()) {
+            Gemstone gemstone = GemstoneHelper.Companion.getGemstone(gSlot, copy());
             if (gemstone != null) {
                 current.add(Text.translatable("gemstone.%1s.%2s".formatted(gemstone.getId().getNamespace(), gemstone.getId().getPath())).formatted(Formatting.DARK_GRAY));
             }

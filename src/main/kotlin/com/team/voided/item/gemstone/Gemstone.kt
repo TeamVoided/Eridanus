@@ -17,7 +17,7 @@ import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
 
-open class Gemstone(val id: Identifier, val type: GemstoneType) {
+open class Gemstone(val id: Identifier, val slot: GemstoneSlot) {
     private var attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
     private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
     private var statusEffects: List<Pair<Pair<StatusEffect, Int>, GemstoneStatusEffectPredicate>> = LinkedList()
@@ -64,7 +64,7 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
 
     fun getItem(): GemstoneItem? = item
 
-    class Builder(val id: Identifier, val type: GemstoneType) {
+    class Builder(val id: Identifier, val slot: GemstoneSlot) {
         private val attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
         private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
         private val statusEffects: MutableList<Pair<Pair<StatusEffect, Int>, GemstoneStatusEffectPredicate>> = LinkedList()
@@ -112,7 +112,7 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
         }
 
         fun build(): Gemstone {
-            val gemstone = Gemstone(id, type)
+            val gemstone = Gemstone(id, slot)
             gemstone.attributeMods = attributeMods
             gemstone.miningSpeedModifier = miningSpeedModifier
             gemstone.statusEffects = statusEffects
