@@ -67,7 +67,7 @@ public abstract class ItemStackMixin {
         for (GemstoneType type : GemstoneType.values()) {
             Gemstone gemstone = GemstoneHelper.Companion.getGemstone(type, copy);
             if (gemstone != null) {
-                gemstone.applyStatusEffects(entity, slot);
+                gemstone.applyStatusEffects(world, entity, slot, selected);
             }
         }
     }

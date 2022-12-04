@@ -22,13 +22,13 @@ class EridanusItems {
             .modifyAttribute(EntityAttributes.GENERIC_MAX_HEALTH, EntityAttributeModifier.Operation.ADDITION, 10.0, EquipmentSlot.LEGS, GemstonePredicate.TRUE)
             .modifyAttribute(EntityAttributes.GENERIC_MAX_HEALTH, EntityAttributeModifier.Operation.ADDITION, 10.0, EquipmentSlot.FEET, GemstonePredicate.TRUE)
             .withApplyPredicate(GemstonePredicate.IS_ARMOR)
+            .withItem(Item.Settings())
             .buildAndRegister()
-        val OPAL_ITEM: GemstoneItem = GemstoneItem(Item.Settings(), OPAL)
+        val OPAL_ITEM: GemstoneItem = OPAL.getItem()!!
 
         fun register() {
             Registry.register(Registry.ITEM, id("void_shard"), VOID_SHARD)
             Registry.register(Registry.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
-            Registry.register(Registry.ITEM, id("opal_item"), OPAL_ITEM)
         }
     }
 }

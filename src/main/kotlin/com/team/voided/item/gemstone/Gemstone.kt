@@ -10,16 +10,19 @@ import net.minecraft.entity.attribute.EntityAttributeModifier.Operation
 import net.minecraft.entity.attribute.EntityAttributeModifier.Operation.*
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.item.Item.Settings
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
 import java.util.*
 
 open class Gemstone(val id: Identifier, val type: GemstoneType) {
     private var attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
     private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
-    private var statusEffects: List<Pair<Pair<StatusEffect, Int>, DualGemstonePredicate<Entity, Int>>> = LinkedList()
+    private var statusEffects: List<Pair<Pair<StatusEffect, Int>, GemstoneStatusEffectPredicate>> = LinkedList()
     private var applyPredicate: GemstonePredicate<ItemStack> = GemstonePredicate.TRUE
+    private var item: GemstoneItem? = null
 
     fun acceptApplyOn(toApply: ItemStack): Boolean {
         return applyPredicate.calculate(toApply)
@@ -37,10 +40,10 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
         }
     }
 
-    fun applyStatusEffects(entity: Entity, slot: Int) {
+    fun applyStatusEffects(world: World, entity: Entity, slot: Int, selected: Boolean) {
         if (entity is LivingEntity) {
             statusEffects.forEach {
-                if (it.second.calculate(entity, slot)) {
+                if (it.second.calculate(world, entity, slot, selected)) {
                     entity.addStatusEffect(StatusEffectInstance(it.first.first, 20, it.first.second, false, true))
                 }
             }
@@ -59,11 +62,14 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
         }
     }
 
+    fun getItem(): GemstoneItem? = item
+
     class Builder(val id: Identifier, val type: GemstoneType) {
         private val attributeMods: MutableMap<EntityAttribute, Pair<Pair<EquipmentSlot, Pair<Operation, Double>>, GemstonePredicate<ItemStack>>> = HashMap()
         private var miningSpeedModifier: Pair<Operation, Float> = Pair(ADDITION, 0f)
-        private val statusEffects: MutableList<Pair<Pair<StatusEffect, Int>, DualGemstonePredicate<Entity, Int>>> = LinkedList()
+        private val statusEffects: MutableList<Pair<Pair<StatusEffect, Int>, GemstoneStatusEffectPredicate>> = LinkedList()
         private var applyPredicate: GemstonePredicate<ItemStack> = GemstonePredicate.TRUE
+        private var itemSettings: Settings? = null
 
         fun modifyAttribute(attribute: EntityAttribute, operation: Operation, modifier: Double, equipmentSlot: EquipmentSlot, predicate: GemstonePredicate<ItemStack>): Builder {
             attributeMods[attribute] = Pair(Pair(equipmentSlot, Pair(operation, modifier)), predicate)
@@ -90,13 +96,18 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
             return this
         }
 
-        fun addStatusEffect(statusEffect: StatusEffect, level: Int, predicate: DualGemstonePredicate<Entity, Int>): Builder {
+        fun addStatusEffect(statusEffect: StatusEffect, level: Int, predicate: GemstoneStatusEffectPredicate): Builder {
             statusEffects.add(Pair(Pair(statusEffect, level), predicate))
             return this
         }
 
         fun withApplyPredicate(predicate: GemstonePredicate<ItemStack>): Builder {
             applyPredicate = predicate
+            return this
+        }
+
+        fun withItem(settings: Settings): Builder {
+            this.itemSettings = settings
             return this
         }
 
@@ -107,11 +118,19 @@ open class Gemstone(val id: Identifier, val type: GemstoneType) {
             gemstone.statusEffects = statusEffects
             gemstone.applyPredicate = applyPredicate
 
+            if (itemSettings != null) {
+                gemstone.item = GemstoneItem(itemSettings!!, gemstone)
+            }
+
             return gemstone
         }
 
         fun buildAndRegister(): Gemstone {
             val gemstone = build()
+
+            if (itemSettings != null) {
+                gemstone.item = (Registry.register(Registry.ITEM, id, GemstoneItem(itemSettings!!, gemstone)) as GemstoneItem)
+            }
 
             return Registry.register(EridanusRegistries.GEMSTONE, gemstone.id, gemstone)
         }
