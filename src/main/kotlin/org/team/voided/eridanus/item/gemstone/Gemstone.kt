@@ -129,7 +129,7 @@ open class Gemstone(val id: Identifier, val slot: GemstoneSlot) {
             val gemstone = build()
 
             if (itemSettings != null) {
-                gemstone.item = (Registry.register(Registry.ITEM, id, GemstoneItem(itemSettings!!, gemstone)) as GemstoneItem)
+                gemstone.item = (Registry.register(Registry.ITEM, id, gemstone.item) as GemstoneItem)
             }
 
             return Registry.register(EridanusRegistries.GEMSTONE, gemstone.id, gemstone)
