@@ -1,3 +1,14 @@
 {
-  "eridanus.vsp.c": "Void Shards: %s"
+  "eridanus.vsp.c": "Void Shards: %s",
+
+  "category.eridanus.key_binds": "Eridanus Keybindings",
+  "key.eridanus.debug": "Debug Key",
+
+  "config.client.eridanus": "Eridanus",
+  "config.category.eridanus": "Category",
+  "config.name.eridanus": "Name",
+
+  "item.eridanus.void_shard": "Void Shard",
+  "item.eridanus.void_shard_pouch": "Void Shard Pouch",
+  "eridanus.gemstone.opal": "Opal"
 }

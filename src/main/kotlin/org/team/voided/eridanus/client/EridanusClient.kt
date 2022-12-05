@@ -5,13 +5,13 @@ import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
 import org.lwjgl.glfw.GLFW
 
-private var enderDebug: KeyBinding? = null
+private var debugKey: KeyBinding? = null
 
 @Suppress("unused")
 fun onInitializeClient() {
-    enderDebug = KeyBindingHelper.registerKeyBinding(
+    debugKey = KeyBindingHelper.registerKeyBinding(
         KeyBinding(
-            "key.eridanus.ender_debug",
+            "key.eridanus.debug",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_I,
             "category.eridanus.key_binds"
