@@ -1,6 +1,6 @@
 plugins {
 	id("fabric-loom") version "1.0-SNAPSHOT"
-	kotlin("jvm") version "1.7.20"
+	kotlin("jvm") version "1.8.0"
 	id("maven-publish")
 }
 
@@ -16,6 +16,7 @@ repositories {
 	// for more information about repositories.
 	maven("https://maven.isxander.dev/releases")
 	maven("https://maven.terraformersmc.com/releases")
+	maven("https://maven.brokenfuse.me/releases")
 }
 
 dependencies {
@@ -28,6 +29,7 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.properties["fabric_version"]}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${project.properties["fabric_kotlin_version"]}")
 	modImplementation("dev.isxander:yet-another-config-lib:${project.properties["yacl_version"]}")
+	modImplementation("org.teamvoided:voidlib:${project.properties["voidlib_version"]}")
 
 
 	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")

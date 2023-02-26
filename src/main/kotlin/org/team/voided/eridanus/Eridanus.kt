@@ -3,7 +3,7 @@ package org.team.voided.eridanus
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.team.voided.eridanus.config.ClientConfig
-import org.team.voided.eridanus.config.ServerConfig
+import org.teamvoided.voidlib.config.ServerConfig
 import org.team.voided.eridanus.item.EridanusItems
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier

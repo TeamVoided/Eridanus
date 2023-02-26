@@ -10,7 +10,8 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.item.Item
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 
 class EridanusItems {
     companion object {
@@ -27,8 +28,8 @@ class EridanusItems {
         val OPAL_ITEM: GemstoneItem = OPAL.getItem()!!
 
         fun register() {
-            Registry.register(Registry.ITEM, id("void_shard"), VOID_SHARD)
-            Registry.register(Registry.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
+            Registry.register(Registries.ITEM, id("void_shard"), VOID_SHARD)
+            Registry.register(Registries.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
         }
     }
 }

@@ -12,8 +12,9 @@ import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Item.Settings
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import java.util.*
 
@@ -129,7 +130,7 @@ open class Gemstone(val id: Identifier, val slot: GemstoneSlot) {
             val gemstone = build()
 
             if (itemSettings != null) {
-                gemstone.item = (Registry.register(Registry.ITEM, id, gemstone.item) as GemstoneItem)
+                gemstone.item = (Registry.register(Registries.ITEM, id, gemstone.item) as GemstoneItem)
             }
 
             return Registry.register(EridanusRegistries.GEMSTONE, gemstone.id, gemstone)
