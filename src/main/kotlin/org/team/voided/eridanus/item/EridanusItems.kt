@@ -1,5 +1,6 @@
 package org.team.voided.eridanus.item
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import org.team.voided.eridanus.VoidRarity
 import org.team.voided.eridanus.id
 import org.team.voided.eridanus.item.gemstone.Gemstone
@@ -26,10 +27,15 @@ class EridanusItems {
             .withItem(Item.Settings())
             .buildAndRegister()
         val OPAL_ITEM: GemstoneItem = OPAL.getItem()!!
+        val STAR = Item(FabricItemSettings())
 
         fun register() {
             Registry.register(Registries.ITEM, id("void_shard"), VOID_SHARD)
             Registry.register(Registries.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
+            regItem("star", STAR)
+        }
+        fun regItem(path:String, item:Item) {
+            Registry.register(Registries.ITEM, id(path), item)
         }
     }
 }
