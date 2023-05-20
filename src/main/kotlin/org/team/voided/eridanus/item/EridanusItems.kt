@@ -28,11 +28,13 @@ class EridanusItems {
             .buildAndRegister()
         val OPAL_ITEM: GemstoneItem = OPAL.getItem()!!
         val STAR = Item(FabricItemSettings())
+        val STAR_FRAGMENT = Item(FabricItemSettings())
 
         fun register() {
             Registry.register(Registries.ITEM, id("void_shard"), VOID_SHARD)
             Registry.register(Registries.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
             regItem("star", STAR)
+            regItem("star_fragment", STAR_FRAGMENT)
         }
         fun regItem(path:String, item:Item) {
             Registry.register(Registries.ITEM, id(path), item)
