@@ -3,7 +3,7 @@ package org.team.voided.eridanus.item.gemstone
 import org.team.voided.eridanus.EridanusRegistries
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 open class GemstoneSlot(val id: Identifier) {
     private var applyPredicate: GemstonePredicate<ItemStack> = GemstonePredicate.TRUE

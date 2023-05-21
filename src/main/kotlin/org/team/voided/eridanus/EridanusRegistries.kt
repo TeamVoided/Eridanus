@@ -3,7 +3,7 @@ package org.team.voided.eridanus
 import org.team.voided.eridanus.item.gemstone.Gemstone
 import org.team.voided.eridanus.item.gemstone.GemstoneSlot
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registry
 
 class EridanusRegistries {
     companion object {
