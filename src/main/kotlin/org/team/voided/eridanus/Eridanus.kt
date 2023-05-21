@@ -9,6 +9,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.team.voided.eridanus.block.EridanusBlocks
 
 const val MODID = "eridanus"
 
@@ -22,6 +23,7 @@ fun onInitialize() {
     LOGGER.info("Hello empty void!")
 
     EridanusItems.register()
+    EridanusBlocks.register()
 }
 
 fun id(path: String): Identifier
