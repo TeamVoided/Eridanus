@@ -30,6 +30,7 @@ class EridanusItems {
         val STAR = Item(FabricItemSettings())
         val STAR_FRAGMENT = Item(FabricItemSettings())
 
+
         fun register() {
             Registry.register(Registries.ITEM, id("void_shard"), VOID_SHARD)
             Registry.register(Registries.ITEM, id("void_shard_pouch"), VOID_SHARD_POUCH)
