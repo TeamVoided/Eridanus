@@ -10,5 +10,9 @@
 
   "item.eridanus.void_shard": "Void Shard",
   "item.eridanus.void_shard_pouch": "Void Shard Pouch",
+
+  "itemGroup.eridanus.eridanus_items": "Eridanus Items",
+  "itemGroup.eridanus.eridanus_blocks": "Eridanus Blocks",
+
   "eridanus.gemstone.opal": "Opal"
 }
