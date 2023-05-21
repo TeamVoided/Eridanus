@@ -7,10 +7,11 @@ import net.minecraft.block.Material
 import net.minecraft.item.BlockItem
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.sound.BlockSoundGroup
 import org.team.voided.eridanus.id
 
 object EridanusBlocks {
-    val VOID_CRYSTAL_BLOCK = Block(FabricBlockSettings.of(Material.AMETHYST))
+    val VOID_CRYSTAL_BLOCK = Block(FabricBlockSettings.of(Material.AMETHYST).sounds(BlockSoundGroup.AMETHYST_BLOCK))
     fun register(){
         regBlock("void_crystal_block", VOID_CRYSTAL_BLOCK)
     }

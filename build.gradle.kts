@@ -31,6 +31,7 @@ dependencies {
 	modImplementation("dev.isxander:yet-another-config-lib:${project.properties["yacl_version"]}")
 	modImplementation("org.teamvoided:voidlib:${project.properties["voidlib_version"]}")
 
+	modImplementation("com.terraformersmc:modmenu:${project.properties["modmenu_version"]}")
 
 	// modImplementation("net.fabricmc.fabric-api:fabric-api-deprecated:${project.properties["fabric_version"]}")
 }
