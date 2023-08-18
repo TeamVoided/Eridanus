@@ -8,20 +8,18 @@ import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.text.Text
 import org.teamvoided.eridanus.Eridanus.id
-import org.teamvoided.eridanus.block.EridanusBlocks
+import org.teamvoided.eridanus.blocks.EriBlocks
 
-object ItemGroups {
+object EriTabs {
     val ERIDANUS_ITEMS = register("eridanus_items")
-
-
-
     val ERIDANUS_BLOCKS = register("eridanus_blocks")
+
     fun init() {
         Registry.register(
             Registries.ITEM_GROUP,
             ERIDANUS_ITEMS,
             FabricItemGroup.builder()
-                .icon { EridanusItems.STAR.defaultStack }
+                .icon { EriItems.STAR.defaultStack }
                 .displayName(Text.of("Eridanus Items"))
                .build()
         )
@@ -30,7 +28,7 @@ object ItemGroups {
             Registries.ITEM_GROUP,
             ERIDANUS_BLOCKS,
             FabricItemGroup.builder()
-                .icon { EridanusBlocks.VOID_CRYSTAL_BLOCK.asItem().defaultStack }
+                .icon { EriBlocks.VOID_CRYSTAL_BLOCK.asItem().defaultStack }
                 .displayName(Text.of("Eridanus Blocks"))
                 .build()
         )

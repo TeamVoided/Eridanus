@@ -1,4 +1,4 @@
-package org.teamvoided.eridanus.item
+package org.teamvoided.eridanus.remove
 
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -14,23 +14,17 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
+import org.teamvoided.eridanus.remove.ntb.ItemNBTHelper
 import kotlin.math.floor
-
+@Suppress("unused")
 class VoidShardPouch(settings: Settings?) : Item(settings) {
     companion object {
         private const val KEY = "vsp.shards.c"
 
-        fun getStoredShards(itemStack: ItemStack): Long
-             = ItemNBTHelper.getLong(KEY, itemStack)
-
-        fun setStoredShards(shards: Long, itemStack: ItemStack)
-            = ItemNBTHelper.putLong(KEY, shards, itemStack)
-
-        fun addShards(shards: Long, itemStack: ItemStack)
-            = setStoredShards(getStoredShards(itemStack) + shards, itemStack)
-
-        fun removeShards(shards: Long, itemStack: ItemStack)
-            = addShards(-shards, itemStack)
+        fun getStoredShards(itemStack: ItemStack): Long = ItemNBTHelper.getLong(KEY, itemStack)
+        fun setStoredShards(shards: Long, itemStack: ItemStack) = ItemNBTHelper.putLong(KEY, shards, itemStack)
+        fun addShards(shards: Long, itemStack: ItemStack) = setStoredShards(getStoredShards(itemStack) + shards, itemStack)
+        fun removeShards(shards: Long, itemStack: ItemStack) = addShards(-shards, itemStack)
 
         fun removeShardsToInventory(shards: Long, inventory: PlayerInventory, itemStack: ItemStack) {
             val storedShards = getStoredShards(itemStack)
@@ -39,7 +33,7 @@ class VoidShardPouch(settings: Settings?) : Item(settings) {
 
             if (storedShards < 64) {
                 removeShards(storedShards, itemStack)
-                inventory.offerOrDrop(ItemStack(EridanusItems.VOID_SHARD, storedShards.toInt()))
+//                inventory.offerOrDrop(ItemStack(EriItems.VOID_SHARD, storedShards.toInt()))
 
                 return
             }
@@ -50,10 +44,10 @@ class VoidShardPouch(settings: Settings?) : Item(settings) {
             val amt = floor(shards / 64f).toInt()
 
             for (i in 0 until amt) {
-                inventory.offerOrDrop(ItemStack(EridanusItems.VOID_SHARD, 64))
+//                inventory.offerOrDrop(ItemStack(EriItems.VOID_SHARD, 64))
             }
 
-            inventory.offerOrDrop(ItemStack(EridanusItems.VOID_SHARD, rem))
+//            inventory.offerOrDrop(ItemStack(EriItems.VOID_SHARD, rem))
         }
 
         fun addShardsFromInventory(shards: Long, inventory: PlayerInventory, itemStack: ItemStack) {
@@ -62,25 +56,25 @@ class VoidShardPouch(settings: Settings?) : Item(settings) {
             inventory.main.forEach { stack ->
                 if (l == 0L) return
 
-                if (stack.item == EridanusItems.VOID_SHARD) {
-                    if ((l - stack.count) < 0 || (l - stack.count) < 64) {
-                        if (stack.count > l) {
-                            addShards(stack.count.toLong(), itemStack)
-                            stack.decrement(l.toInt())
-                            l = 0
-                            return
-                        }
-
-                        l -= stack.count
-                        addShards(stack.count.toLong(), itemStack)
-                        stack.decrement(stack.count)
-                        return
-                    }
-
-                    l -= 64
-                    addShards(stack.count.toLong(), itemStack)
-                    stack.decrement(64)
-                }
+//                if (stack.item == EriItems.VOID_SHARD) {
+//                    if ((l - stack.count) < 0 || (l - stack.count) < 64) {
+//                        if (stack.count > l) {
+//                            addShards(stack.count.toLong(), itemStack)
+//                            stack.decrement(l.toInt())
+//                            l = 0
+//                            return
+//                        }
+//
+//                        l -= stack.count
+//                        addShards(stack.count.toLong(), itemStack)
+//                        stack.decrement(stack.count)
+//                        return
+//                    }
+//
+//                    l -= 64
+//                    addShards(stack.count.toLong(), itemStack)
+//                    stack.decrement(64)
+//                }
             }
         }
     }
@@ -102,24 +96,24 @@ class VoidShardPouch(settings: Settings?) : Item(settings) {
 
     override fun onStackClicked(stack: ItemStack, slot: Slot, clickType: ClickType, player: PlayerEntity): Boolean {
         if (clickType == ClickType.RIGHT) {
-            if (slot.stack.isEmpty) {
-                val size = getStoredShards(stack)
-
-                if (size < 64) {
-                    slot.stack = ItemStack(EridanusItems.VOID_SHARD, size.toInt())
-                    setStoredShards(0, stack)
-                    playRemoveOneSound(player)
-                } else {
-                    slot.stack = ItemStack(EridanusItems.VOID_SHARD, 64)
-                    removeShards(64, stack)
-                    playRemoveOneSound(player)
-                }
-            } else if (slot.stack.item == EridanusItems.VOID_SHARD) {
-                val size = slot.stack.count
-                slot.stack.decrement(size)
-                addShards(size.toLong(), stack)
-                playInsertSound(player)
-            }
+//            if (slot.stack.isEmpty) {
+//                val size = getStoredShards(stack)
+//
+//                if (size < 64) {
+//                    slot.stack = ItemStack(EriItems.VOID_SHARD, size.toInt())
+//                    setStoredShards(0, stack)
+//                    playRemoveOneSound(player)
+//                } else {
+//                    slot.stack = ItemStack(EriItems.VOID_SHARD, 64)
+//                    removeShards(64, stack)
+//                    playRemoveOneSound(player)
+//                }
+//            } else if (slot.stack.item == EriItems.VOID_SHARD) {
+//                val size = slot.stack.count
+//                slot.stack.decrement(size)
+//                addShards(size.toLong(), stack)
+//                playInsertSound(player)
+//            }
 
             return true
         }

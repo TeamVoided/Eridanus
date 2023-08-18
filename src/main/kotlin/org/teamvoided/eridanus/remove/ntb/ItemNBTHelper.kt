@@ -1,4 +1,4 @@
-package org.teamvoided.eridanus.item
+package org.teamvoided.eridanus.remove.ntb
 
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound

@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "eridanus",
   "version": "${version}",
-
   "name": "Eridanus",
   "description": "void!",
   "authors": [
@@ -13,29 +12,29 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-
   "license": "Unlicensed",
   "icon": "assets/eridanus/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "org.teamvoided.eridanus.Eridanus::onInitialize"
+        "value": "org.teamvoided.eridanus.Eridanus::commonInit"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "org.teamvoided.eridanus.client.EridanusClientKt::onInitializeClient"
+        "value": "org.teamvoided.eridanus.Eridanus::clientInit"
       }
+    ],
+    "modmenu": [
+      "org.teamvoided.eridanus.compat.EridanusModMenuApiImpl"
     ]
   },
   "mixins": [
     "eridanus.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.14.22",
     "fabric-api": "*",

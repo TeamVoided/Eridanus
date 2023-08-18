@@ -4,8 +4,6 @@
   "package": "org.teamvoided.eridanus.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ItemStackMixin",
-    "MinecraftServerMixin",
     "MixinEntity"
   ],
   "client": [],

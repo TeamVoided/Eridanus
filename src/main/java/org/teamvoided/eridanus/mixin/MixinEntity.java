@@ -1,7 +1,7 @@
 package org.teamvoided.eridanus.mixin;
 
 import org.spongepowered.asm.mixin.Unique;
-import org.teamvoided.eridanus.entity.IEntityData;
+import org.teamvoided.eridanus.remove.ntb.IEntityData;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +20,7 @@ public abstract class MixinEntity implements IEntityData {
 
     @NotNull
     @Override
-    public NbtCompound getPersistentData() {
+    public NbtCompound eridanus$getPersistentData() {
         if (persistentData == null)
             persistentData = new NbtCompound();
 
