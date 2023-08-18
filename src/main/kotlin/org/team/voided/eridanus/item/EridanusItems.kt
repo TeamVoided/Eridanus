@@ -17,12 +17,8 @@ import org.team.voided.eridanus.item.gemstone.GemstoneItem
 import org.team.voided.eridanus.item.gemstone.GemstonePredicate
 import org.team.voided.eridanus.item.gemstone.GemstoneSlots
 
-
+@Suppress("unused")
 object EridanusItems {
-
-
-
-
     val VOID_SHARD: Item = VoidShardItem(Item.Settings(), VoidRarity.COMMON)
     val VOID_SHARD_POUCH: Item = VoidShardPouch(Item.Settings())
     val OPAL: Gemstone = Gemstone.Builder(id("opal"), GemstoneSlots.REINFORCEMENT)
@@ -83,8 +79,6 @@ object EridanusItems {
             })
     }
 
-    fun regItem(path: String, item: Item) {
-        Registry.register(Registries.ITEM, id(path), item)
-    }
+    fun regItem(path: String, item: Item) = Registry.register(Registries.ITEM, id(path), item)
 
 }

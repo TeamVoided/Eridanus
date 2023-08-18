@@ -26,8 +26,7 @@ fun onInitialize() {
     EridanusBlocks.register()
 }
 
-fun id(path: String): Identifier
-    = Identifier(MODID, path)
+fun id(path: String): Identifier = Identifier(MODID, path)
 
 fun identifierFromString(string: String): Identifier {
     if (string.contains(":")) {

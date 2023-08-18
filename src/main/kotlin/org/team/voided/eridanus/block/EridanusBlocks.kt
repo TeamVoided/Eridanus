@@ -12,23 +12,20 @@ import net.minecraft.sound.BlockSoundGroup
 import org.team.voided.eridanus.id
 import org.team.voided.eridanus.item.ItemGroups
 
+
+@Suppress("MemberVisibilityCanBePrivate")
 object EridanusBlocks {
-    val VOID_CRYSTAL_BLOCK: Block = regBlock(
-        "void_crystal_block",
+    val VOID_CRYSTAL_BLOCK: Block =
         Block(FabricBlockSettings.of(Material.AMETHYST).sounds(BlockSoundGroup.AMETHYST_BLOCK))
-    )
 
     fun register() {
+        blockWithItem("void_crystal_block", VOID_CRYSTAL_BLOCK)
     }
 
-    fun regBlock(path: String, block: Block): Block {
-        val item = Registry.register(
-            Registries.ITEM,
-            id(path),
-            BlockItem(block, FabricItemSettings())
-        )
+    private fun blockWithItem(id: String, block: Block): Block {
+        val item = Registry.register(Registries.ITEM, id(id), BlockItem(block, FabricItemSettings()))
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.ERIDANUS_BLOCKS)
             .register(ItemGroupEvents.ModifyEntries { it.add(item) })
-        return Registry.register(Registries.BLOCK, id(path), block)
+        return Registry.register(Registries.BLOCK, id(id), block)
     }
 }
